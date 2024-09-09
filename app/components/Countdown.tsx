@@ -41,18 +41,18 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
   return (
     <div className="flex items-center justify-between">
       <NumberBox num={timeLeft.days} unit="Days" />
-      <span className="inline-block -mt-8 mx-2 md:mx-[14.5px] text-[28px] md:text-[40px] font-semibold text-white">
+      <span className="inline-block -mt-10 mx-1 md:mx-[14.5px] text-xl md:text-[40px] font-semibold text-white">
         :
       </span>
       <NumberBox num={timeLeft.hours} unit="Hours" />
-      <span className="inline-block -mt-8 mx-2 md:mx-[14.5px] text-[28px] md:text-[40px] font-semibold text-white ">
+      <span className="inline-block -mt-10 mx-1 md:mx-[14.5px] text-xl md:text-[40px] font-semibold text-white ">
         :
       </span>
       <NumberBox num={timeLeft.minutes} unit="Minutes" />
-      <span className="hidden md:inline-block -mt-8 mx-2 md:mx-[14.5px] text-[28px] md:text-[40px] font-semibold text-white ">
+      <span className="inline-block -mt-10 mx-1 md:mx-[14.5px] text-xl md:text-[40px] font-semibold text-white ">
         :
       </span>
-      <div className="hidden md:inline-flex">
+      <div className="inline-flex">
         <NumberBox num={timeLeft.seconds} unit="Seconds" />
       </div>
     </div>

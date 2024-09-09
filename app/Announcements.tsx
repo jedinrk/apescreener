@@ -4,16 +4,22 @@ import React, { useState } from "react";
 import { inter, poppins } from "./fonts";
 import { AnnouncementCard } from "./components/AnnouncementCard";
 import bgCardEarlyAccess from "../public/image-card-active.png";
+import bgCardGalxeQuest from "../public/bg-card-galxe-quest.png";
 import { GetEarlyAccessModal } from "./components/GetEarlyAccessModal";
+import { JoinGalxeQuestCard } from "./components/JoinGalxeQuestCard";
+import { PopUpModal, PopUpModalType } from "./components/PopUpModal";
 
 export const Announcements: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeModalType, setActiveModalType] = useState(PopUpModalType.NONE);
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (modalType: PopUpModalType) => {
+    setActiveModalType(modalType);
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
+    setActiveModalType(PopUpModalType.NONE);
     setIsModalOpen(false);
   };
   return (
@@ -30,14 +36,18 @@ export const Announcements: React.FC = () => {
             backgroundImage={bgCardEarlyAccess.src}
             label="Submit for <br/> Early Access now!"
             revealed={true}
-            onClick={handleOpenModal}
+            onClick={() => {
+              handleOpenModal(PopUpModalType.EARLY_ACCESS);
+            }}
           />
-          <AnnouncementCard
+          <JoinGalxeQuestCard
             step={2}
-            backgroundImage={""}
-            label={"To be revealed"}
-            revealed={false}
-            onClick={() => {}}
+            backgroundImage={bgCardGalxeQuest.src}
+            label={"Join Galxe Quest"}
+            revealed={true}
+            onClick={() => {
+              handleOpenModal(PopUpModalType.GALXE_QUEST);
+            }}
           />
           <AnnouncementCard
             step={3}
@@ -48,7 +58,11 @@ export const Announcements: React.FC = () => {
           />
         </div>
       </div>
-      <GetEarlyAccessModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      <PopUpModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        activeModalType={activeModalType}
+      />
     </section>
   );
 };
