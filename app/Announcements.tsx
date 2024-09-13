@@ -34,7 +34,7 @@ export const Announcements: React.FC = () => {
           <AnnouncementCard
             step={1}
             backgroundImage={bgCardEarlyAccess.src}
-            label="Submit for <br/> Early Access now!"
+            label="Early Access"
             revealed={true}
             onClick={() => {
               handleOpenModal(PopUpModalType.EARLY_ACCESS);
