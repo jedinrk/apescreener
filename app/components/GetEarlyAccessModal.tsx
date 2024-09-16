@@ -10,6 +10,8 @@ import Link from "next/link";
 
 import IconX from "../../public/icon_x.svg";
 import ImgSuccess from "../../public/image_success.svg";
+import Telegram from "../../public/icon_tg.svg";
+import Logo from "../../public/logo.svg";
 import { useAccount } from "wagmi";
 import CustomButton from "./CustomButton";
 
@@ -38,17 +40,56 @@ const renderWhitelistValidation = (
   switch (whitelistValidation) {
     case WHITELIST_VALIDATION.WHITELISTED:
       return (
-        <div className="flex-col justify-start items-start gap-6 flex">
-          <CustomButton
-            label={"Early Access Group"}
-            onClick={function (): void {}}
-            isEnabled={true}
-          />
-          <CustomButton
-            label={"AppScreener"}
-            onClick={function (): void {}}
-            isEnabled={true}
-          />
+        <div className="flex flex-col items-center">
+          <Image src={ImgSuccess} alt="Image Success" />
+          <div className="flex-col justify-start items-center gap-2 flex">
+            <div
+              className={`text-center text-white text-[32px] font-semibold ${poppins.className}`}
+            >
+              Congratulations!
+            </div>
+            <div
+              className={`text-center text-white/80 text-base font-normal ${inter.className} leading-normal mb-5`}
+            >
+              Your wallet has been selected for the Whitelist.
+            </div>
+            <div
+              className={`text-center text-white/80 text-base font-normal ${inter.className} leading-normal`}
+            >
+              Join the Early Access telegram group, where you can ask questions
+              or write suggestions.
+            </div>
+            <Link
+              href={"https://t.me/+ZWc9pDJdhHI4ODcy"}
+              target="_blank"
+              className="w-full"
+            >
+              <CustomButton
+                label={"Early Access Group"}
+                onClick={function (): void {}}
+                isEnabled={true}
+                icon={Telegram}
+              />
+            </Link>
+            <div className="h-[1px] w-full bg-white/10 mt-5"></div>
+            <div
+              className={`text-center text-white/80 text-base font-normal ${inter.className} leading-normal mt-5`}
+            >
+              Your link to access the DApp
+            </div>
+            <Link
+              href={"https://beta.apescreener.xyz/"}
+              target="_blank"
+              className="w-full"
+            >
+              <button
+                onClick={function (): void {}}
+                className={`w-full h-14 p-4 rounded-[500px] justify-center items-center gap-2.5 inline-flex transition-transform duration-150 ease-in-out transform active:scale-95 bg-black`}
+              >
+                <Image src={Logo} alt={"btn-icon"} />
+              </button>
+            </Link>
+          </div>
         </div>
       );
     case WHITELIST_VALIDATION.NOT_WHITELISTED:
@@ -151,10 +192,8 @@ export const GetEarlyAccessModal: React.FC<GetEarlyAccessModalProps> = ({
 
   useEffect(() => {
     if (address) {
-      console.log("address: ", address);
       setIsWalletConnected(true);
       const lowercaseAddress = address.toLowerCase();
-      console.log("lowercaseAddress: ", lowercaseAddress);
       const fetchData = async () => {
         try {
           const response = await axios.get(
@@ -165,7 +204,6 @@ export const GetEarlyAccessModal: React.FC<GetEarlyAccessModalProps> = ({
           );
 
           // Handle successful response
-          console.log("API response:", response.data);
           setIsWhitelisted(WHITELIST_VALIDATION.WHITELISTED);
         } catch (error) {
           if (axios.isAxiosError(error)) {
@@ -200,7 +238,6 @@ export const GetEarlyAccessModal: React.FC<GetEarlyAccessModalProps> = ({
     try {
       // Validate the Ethereum wallet address
       if (isValidEthereumAddress(walletAddress)) {
-        console.log("Valid Wallet Address:", walletAddress);
         const response = await axios.post(
           "https://vigilante.apescreener.xyz/api/register",
           {
@@ -262,7 +299,9 @@ export const GetEarlyAccessModal: React.FC<GetEarlyAccessModalProps> = ({
             </div>
           </div>
           <div
-            className={`text-center text-white/80 text-base font-normal leading-normal ${inter.className}`}
+            className={`text-center text-white/80 text-base font-normal leading-normal ${
+              inter.className
+            } ${isWalletConnected ? `hidden` : `visible`}`}
           >
             To participate, please provide your wallet address here:
           </div>

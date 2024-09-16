@@ -1,13 +1,16 @@
+import Image from "next/image";
 interface GetEarlyAccessModalProps {
   label: string;
   onClick: () => void;
   isEnabled: boolean;
+  icon?: string
 }
 
 const CustomButton: React.FC<GetEarlyAccessModalProps> = ({
   label,
   onClick,
   isEnabled,
+  icon
 }) => {
   return (
     <button
@@ -18,6 +21,7 @@ const CustomButton: React.FC<GetEarlyAccessModalProps> = ({
           : "bg-white/10"
       }`}
     >
+      {icon && <Image src={icon} alt={"btn-icon"} />}
       <span
         className={`${
           isEnabled ? "text-black" : "text-white/50"
