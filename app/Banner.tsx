@@ -33,7 +33,7 @@ export const Banner = () => {
           <span
             className={`${inter.className} text-black text-lg font-semibold leading-[25.20px]`}
           >
-            Get early access
+            Early Access
           </span>
         </button>
       </div>
