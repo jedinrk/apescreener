@@ -9,7 +9,7 @@ export const Navbar = () => {
   return (
     <nav className="sm:p-6 md:flex md:justify-between md:items-center backdrop-blur-md sticky top-0 z-50 bg-[#181a1e] bg-opacity-25">
       <div className="container mx-auto flex justify-between items-center">
-        <a href="/landingPage">
+        <a href="/">
           <Image src={Logo} alt={"Logo"} />
         </a>
         <div className="flex gap-2">
